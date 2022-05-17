@@ -35,11 +35,7 @@ public class UserController {
 		userService.save(user);
 		
 		return new ResponseEntity(new Mensaje("Usuario creado exitosamente."), HttpStatus.CREATED);
-		
-//		return new ResponseEntity<User>(user, HttpStatus.CREATED);
-		
-//		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
-		
+				
 	}
 	
 	@GetMapping("/{id}")
