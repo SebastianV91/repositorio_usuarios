@@ -1,11 +1,7 @@
 package com.crud.proyecto.controller;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,40 +15,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crud.proyecto.entity.User;
-import com.crud.proyecto.service.UserService;
-import com.crud.proyecto.dto.Mensaje;
+import com.crud.proyecto.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api/users/")
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	UserServiceImpl userImpl;
+
 
 	@PostMapping("/save")
-	public ResponseEntity<?> create(@RequestBody User user){
-		
-		userService.save(user);
-		
-		return new ResponseEntity(new Mensaje("Usuario creado exitosamente."), HttpStatus.CREATED);
+	public ResponseEntity<?> create(@RequestBody User user) throws Exception{
+		//UserServiceImpl userImpl = new UserServiceImpl();
+
+		return new ResponseEntity(userImpl.ejemploDB("sebastian").toString(), HttpStatus.CREATED);
 				
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> read(@PathVariable(value = "id") Long userId){
-		Optional<User> oUser = userService.findById(userId);
 		
-		if(!oUser.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
 		
-		return ResponseEntity.ok(oUser);
+		return ResponseEntity.ok(null);
 		
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@RequestBody User userDetails, @PathVariable(value = "id") Long userId){
-		Optional<User> user = userService.findById(userId);
+		/*Optional<User> user = userService.findById(userId);
 		
 		if(!user.isPresent()) {
 			return ResponseEntity.notFound().build();
@@ -61,20 +52,20 @@ public class UserController {
 		user.get().setName(userDetails.getName());
 		user.get().setSurname(userDetails.getSurname());
 		user.get().setEmail(userDetails.getEmail());
-		user.get().setEnabled(userDetails.getEnabled());
+		user.get().setEnabled(userDetails.getEnabled());*/
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user.get()));
+		return ResponseEntity.ok().build();
 		
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long userId){
 		
-		if(!userService.findById(userId).isPresent()) {
+		/*if(!userService.findById(userId).isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		userService.deleteById(userId);
+		userService.deleteById(userId);*/
 		
 		return ResponseEntity.ok().build();
 		
@@ -83,11 +74,11 @@ public class UserController {
 	@GetMapping
 	public List<User> readAll(){
 		
-		List<User> users = StreamSupport
+		/*List<User> users = StreamSupport
 				.stream(userService.findAll().spliterator(), false)
-				.collect(Collectors.toList());
+				.collect(Collectors.toList());*/
 		
-		return users;
+		return null;
 	}
 	
 }
