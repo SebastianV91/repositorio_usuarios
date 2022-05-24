@@ -1,4 +1,4 @@
-package com.crud.proyecto.entity;
+package com.crud.proyecto.dto;
 
 import java.io.Serializable;
 
@@ -27,11 +27,14 @@ public class User implements Serializable{
 	
 	private String surname;
 	
-	@Column(name = "mail", nullable=false, length = 50, unique = true)
-	private String email;
+	private String mail;
 	
-	private Boolean enabled;
+	private Integer enabled;
 
+	private String usuario;
+	
+	private String password;
+	
 	public Long getId() {
 		return id;
 	}
@@ -56,20 +59,36 @@ public class User implements Serializable{
 		this.surname = surname;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
-	public Boolean getEnabled() {
+	public Integer getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(Boolean enabled) {
+	public void setEnabled(Integer enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

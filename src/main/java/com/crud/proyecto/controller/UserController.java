@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.crud.proyecto.entity.User;
-import com.crud.proyecto.service.UserServiceImpl;
+import com.crud.proyecto.dto.User;
+import com.crud.proyecto.service.UserService;
 
 @RestController
 @RequestMapping("/api/users/")
 public class UserController {
 
 	@Autowired
-	UserServiceImpl userImpl;
+	UserService userImpl;
 
 
 	@PostMapping("/save")
@@ -30,6 +30,24 @@ public class UserController {
 		//UserServiceImpl userImpl = new UserServiceImpl();
 
 		return new ResponseEntity(userImpl.ejemploDB("sebastian").toString(), HttpStatus.CREATED);
+				
+	}
+	
+	@PostMapping("/saveUser")
+	public ResponseEntity<?> createUser(@RequestBody User user) throws Exception{
+		//UserServiceImpl userImpl = new UserServiceImpl();
+
+		return new ResponseEntity(userImpl.insertUser(user), HttpStatus.OK);
+				
+	}																					
+	
+	@PostMapping("/updateUser")
+	public ResponseEntity<?> updateUser(@RequestBody User user) throws Exception{
+		//UserServiceImpl userImpl = new UserServiceImpl();
+
+		//userImpl.updateUser(user);
+		
+		return new ResponseEntity(userImpl.updateUser(user), HttpStatus.CREATED);		
 				
 	}
 	
