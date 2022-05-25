@@ -51,52 +51,11 @@ public class UserController {
 				
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<?> read(@PathVariable(value = "id") Long userId){
-		
-		
-		return ResponseEntity.ok(null);
-		
+	@PostMapping("/loginUser")
+	public ResponseEntity<?> signinUser(@RequestBody User user) throws Exception{
+		return new ResponseEntity(userImpl.loginUser(user), HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody User userDetails, @PathVariable(value = "id") Long userId){
-		/*Optional<User> user = userService.findById(userId);
-		
-		if(!user.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		user.get().setName(userDetails.getName());
-		user.get().setSurname(userDetails.getSurname());
-		user.get().setEmail(userDetails.getEmail());
-		user.get().setEnabled(userDetails.getEnabled());*/
-		
-		return ResponseEntity.ok().build();
-		
-	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable(value = "id") Long userId){
-		
-		/*if(!userService.findById(userId).isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		userService.deleteById(userId);*/
-		
-		return ResponseEntity.ok().build();
-		
-	}
-	
-	@GetMapping
-	public List<User> readAll(){
-		
-		/*List<User> users = StreamSupport
-				.stream(userService.findAll().spliterator(), false)
-				.collect(Collectors.toList());*/
-		
-		return null;
-	}
 	
 }

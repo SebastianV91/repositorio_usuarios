@@ -69,19 +69,6 @@ public class UserRepository {
 				+ "VALUES (?, ?, ?, ?, ?, ?) ";
 
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, user.getMail(), user.getEnabled(), user.getName(), user.getSurname(), user.getUsuario(), user.getPassword());				
-
-/*		if(rows != null) {
-			for (Map<String, Object> row : rows) {
-				System.out.println("RESPUESTA DB::"+(String) row.get("nombre"));
-				respuesta.put("mail", user.getEmail());
-				respuesta.put("enabled", user.getEnabled());
-				respuesta.put("name", user.getName());
-				respuesta.put("surname", user.getSurname());
-				respuesta.put("usuario", user.getUsuario());
-				respuesta.put("password", user.getPassword());
-				
-			}
-		}																	*/
 		
 		return  respuesta;
 	}																		
@@ -97,6 +84,33 @@ public class UserRepository {
 								
 		return  rows;
 		
+	}
+	
+	public  Map<String, Object> loginUserRepository(User user) throws Exception  {
+		Map<String, Object> respuesta = new HashMap<>();
+		
+		String sql = "SELECT  "
+				+ " USUARIO, PASSWORD "
+				+ "FROM USERS "
+				+ "WHERE USUARIO = ?  AND PASSWORD = ?";
+
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, user.getUsuario(), user.getPassword());				
+
+//		System.out.println("::::::: ROWS :::::::: "+rows);
+		
+		if(rows != null) {
+			for (Map<String, Object> row : rows) {
+				System.out.println("RESPUESTA DB::"+(String) row.get("nombre"));
+				respuesta.put("USUARIO", (String) row.get("USUARIO"));
+				respuesta.put("PASSWORD", (String) row.get("PASSWORD"));
+				
+			}
+			if(rows.isEmpty()) {
+					respuesta.put("message", "usuario/contraseña no valida");
+			}
+		}
+		
+		return  respuesta;
 	}
 	
 }

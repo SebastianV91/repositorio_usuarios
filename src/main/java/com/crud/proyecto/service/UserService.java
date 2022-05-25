@@ -26,7 +26,7 @@ public class UserService extends  UserRepository{
 		return insertUserRepository(user);
 	}																		
 	
-public Map<String, Object> updateUser(User user) throws Exception {
+	public Map<String, Object> updateUser(User user) throws Exception {
 		
 		Map <String, Object> response = new HashMap<String, Object>();
 		
@@ -41,4 +41,9 @@ public Map<String, Object> updateUser(User user) throws Exception {
 		return response;
 	}
 	
+	public Map<String, Object> loginUser(User user) throws Exception {
+//		System.out.println(":::REPUESTA::: "+loginUserRepository(user));
+		return loginUserRepository(user);
+	}
+
 }
